@@ -1,0 +1,38 @@
+{
+  "arquivos_expostos": [
+    {
+      "alias": "Arquivos Expostos",
+      "nome": "Arquivos de Log (.log)",
+      "dork": "ext:log",
+      "descricao": "Busca por arquivos de log que podem conter credenciais ou caminhos sensíveis."
+    },
+    {
+      "alias": "Arquivos Expostos",
+      "nome": "Documentos PDF",
+      "dork": "filetype:pdf",
+      "descricao": "Busca por PDFs públicos indexados no alvo."
+    }
+  ],
+  "infraestrutura_e_diretorios": [
+    {
+      "alias": "Infraestrutura e Diretórios",
+      "nome": "Diretórios Abertos (Index of)",
+      "dork": "intitle:\"index of\"",
+      "descricao": "Procura por servidores web com listagem de diretórios habilitada."
+    },
+    {
+      "alias": "Infraestrutura e Diretórios",
+      "nome": "Painéis de Login Genéricos",
+      "dork": "inurl:login | inurl:admin",
+      "descricao": "Busca por rotas administrativas padrão."
+    }
+  ],
+  "dispositivos_iot": [
+    {
+      "alias": "Dispositivos IoT",
+      "nome": "Câmeras IP Abertas",
+      "dork": "intitle:\"webcamXP 5\" | inurl:view/view.shtml",
+      "descricao": "Busca por câmeras de segurança conectadas à internet sem autenticação."
+    }
+  ]
+}
