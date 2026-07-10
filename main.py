@@ -1,6 +1,7 @@
 import json
 import urllib.parse
 import webbrowser
+import subprocess
 
 # Abre o arquivo json e converte em dicionário
 with open("dorks.json", "r") as dorks_list:
@@ -96,6 +97,8 @@ open_browser = input("Deseja abrir o navegador já com a pesquisa selecionada? (
 if open_browser == "s" or open_browser == "":
     webbrowser.open_new_tab(final_url)
 else:
+    clipboard_call = ["wl-copy"]
+    subprocess.run(clipboard_call, input=query_string, text=True, check=True)
     print("Pesquisa copiada para a área de transferência")
     # IMPLEMENTAR:
     # Copiar query_string para a área de transferência

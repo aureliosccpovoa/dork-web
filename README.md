@@ -24,6 +24,8 @@ Uma ferramenta de linha de comando (CLI) desenvolvida em Python para agilizar op
    ```
 
 ## 🚧 Próximos Passos (Roadmap)
-[ ] Implementar cópia automática da string gerada para a área de transferência do S.O.
+[*] FEITO: ~~Implementar cópia automática da string gerada para a área de transferência do SO.~~
+
 [ ] Refatorar código em blocos funcionais (Funções).
+
 [ ] Adicionar suporte a interface gráfica no terminal (TUI) para checkboxes interativos.
