@@ -12,7 +12,7 @@ Uma ferramenta de linha de comando (CLI) desenvolvida em Python para agilizar op
 
 ## 🛠️ Tecnologias Utilizadas
 * Python 3.x
-* Bibliotecas Nativas: `json`, `urllib.parse`, `webbrowser`
+* Bibliotecas nativas: `json`, `urllib.parse`, `webbrowser`, `subprocess` 
 
 ## ⚙️ Como executar
 
