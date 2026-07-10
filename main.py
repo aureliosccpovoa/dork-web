@@ -94,11 +94,10 @@ print(f"\n[!] PESQUISA GERADA: {query_string}\n")
 
 open_browser = input("Deseja abrir o navegador já com a pesquisa selecionada? (S/n): ").lower()
 
+# Abre o navegador padrão do sistema ou copia a pesquisa para a área de transferência
 if open_browser == "s" or open_browser == "":
     webbrowser.open_new_tab(final_url)
 else:
     clipboard_call = ["wl-copy"]
     subprocess.run(clipboard_call, input=query_string, text=True, check=True)
     print("Pesquisa copiada para a área de transferência")
-    # IMPLEMENTAR:
-    # Copiar query_string para a área de transferência
