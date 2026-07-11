@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import functions
 
 dorks = functions.load_dorks("dorks.json")

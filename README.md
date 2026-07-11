@@ -24,8 +24,12 @@ Ferramenta de linha de comando (CLI) desenvolvida em Python para agilizar opera�
    ```
 
 ## 🚧 Próximos Passos (Roadmap)
-[✅] CONCLUÍDO: ~~Implementar cópia automática da string gerada para a área de transferência do SO.~~
-
-[✅] CONCLUÍDO: ~~Refatorar código em blocos funcionais (Funções).~~
-
-[🔜] EM BREVE: Adicionar suporte a interface gráfica no terminal (TUI) para checkboxes interativos.
+### CONCLUÍDO:
+- [✅] ~~Implementar cópia automática da string gerada para a área de transferência do SO.~~
+- [✅] ~~Refatorar código em blocos funcionais (Funções).~~
+### EM BREVE: 
+- [ ] Padronizar a execução como utilitário de linha de comando (CLI) nativo.
+- [ ] Implementar tratamento de exceções (`try/except`) para blindar entradas inválidas e falhas de leitura.
+- [ ] Adicionar portabilidade multiplataforma para a área de transferência (Linux, Windows, macOS).
+- [ ] Adicionar suporte a interface gráfica no terminal (TUI) para seleção interativa.
+- [ ] Implementar sistema de "Favoritos" para salvar as combinações de dorks mais usadas.
