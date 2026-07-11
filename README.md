@@ -24,8 +24,8 @@ Ferramenta de linha de comando (CLI) desenvolvida em Python para agilizar opera�
    ```
 
 ## 🚧 Próximos Passos (Roadmap)
-[*] FEITO: ~~Implementar cópia automática da string gerada para a área de transferência do SO.~~
+[✅] CONCLUÍDO: ~~Implementar cópia automática da string gerada para a área de transferência do SO.~~
 
-[ ] Refatorar código em blocos funcionais (Funções).
+[✅] CONCLUÍDO: ~~Refatorar código em blocos funcionais (Funções).~~
 
-[ ] Adicionar suporte a interface gráfica no terminal (TUI) para checkboxes interativos.
+[🔜] EM BREVE: Adicionar suporte a interface gráfica no terminal (TUI) para checkboxes interativos.

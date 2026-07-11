@@ -34,5 +34,47 @@
       "dork": "intitle:\"webcamXP 5\" | inurl:view/view.shtml",
       "descricao": "Busca por câmeras de segurança conectadas à internet sem autenticação."
     }
+  ],
+  "bancos_de_dados": [
+    {
+      "alias": "Bancos de Dados",
+      "nome": "Backups SQL Expostos",
+      "dork": "ext:sql intext:\"INSERT INTO\" | intext:\"phpMyAdmin\"",
+      "descricao": "Localiza dumps de bancos de dados contendo tabelas e registros potencialmente sensíveis."
+    },
+    {
+      "alias": "Bancos de Dados",
+      "nome": "Arquivos de Banco SQLite",
+      "dork": "ext:db | ext:sqlite | ext:sqlite3",
+      "descricao": "Busca por arquivos diretos de bancos de dados SQLite deixados em diretórios públicos."
+    }
+  ],
+  "credenciais_e_senhas": [
+    {
+      "alias": "Credenciais e Senhas",
+      "nome": "Arquivos de Variáveis de Ambiente (.env)",
+      "dork": "ext:env \"DB_PASSWORD\" | \"API_KEY\"",
+      "descricao": "Procura por arquivos .env expostos que frequentemente contêm chaves de API e senhas de produção."
+    },
+    {
+      "alias": "Credenciais e Senhas",
+      "nome": "Listas de Senhas em Texto Plano",
+      "dork": "ext:txt | ext:csv intext:\"password\" | intext:\"senha\" | intext:\"credentials\"",
+      "descricao": "Busca por arquivos de texto ou planilhas que possam conter listas de credenciais."
+    }
+  ],
+  "arquivos_de_configuracao": [
+    {
+      "alias": "Configurações Sensíveis",
+      "nome": "Configurações de FTP e SSH",
+      "dork": "ext:txt | ext:conf intext:\"ftp\" | intext:\"ssh\" intext:\"password\" | intext:\"username\"",
+      "descricao": "Localiza arquivos de configuração com credenciais de acesso a servidores."
+    },
+    {
+      "alias": "Configurações Sensíveis",
+      "nome": "Git Exposto",
+      "dork": "intitle:\"Index of\" \".git\"",
+      "descricao": "Procura por repositórios Git inteiros expostos publicamente na web."
+    }
   ]
 }
