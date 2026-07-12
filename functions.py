@@ -2,15 +2,39 @@ import json
 import webbrowser
 import subprocess
 import urllib.parse
+import urllib.request
+import sys
+
+dorks_filename = "dorks.json"
 
 def load_dorks(file_path):
     """
     Abre o arquivo json e converte em dicionário.
     """
+    try:
 
-    with open(file_path, "r") as dorks_list:
-        dorks = json.load(dorks_list)
-    return dorks
+        with open(file_path, "r") as dorks_list:
+            dorks = json.load(dorks_list)
+
+        return dorks
+    
+    except FileNotFoundError:
+
+        dorks_newfile = input("Arquivo dorks.json não encontrado! Deseja baixá-lo novamente do repositório remoto? (S/n): ").lower()
+
+        if dorks_newfile == "s" or dorks_newfile == "":
+            dorks_url_raw = "https://raw.githubusercontent.com/aureliosccpovoa/dork-web/refs/heads/main/dorks.json"
+            urllib.request.urlretrieve(dorks_url_raw, dorks_filename)
+
+            return load_dorks(file_path)
+        else:
+            print("Execução interrompida (FileNotFoundError).")
+            sys.exit(1)
+
+    except json.JSONDecodeError:
+
+        print("Erro ao carregar o arquivo dorks.json. Verificar sintaxe.")
+        sys.exit(1)
 
 
 def select_dorks(dorks):
@@ -36,10 +60,29 @@ def select_dorks(dorks):
             list_number +=1
 
             dorks_mapped.append(dork)
+    
+    while True:
+        # Solicita ao usuário que selecione opções e separa em itens de lista
+        usr_input = input("\nEscolha uma ou mais opções acima (somente números separados por espaço): ")
+        usr_input = usr_input.split()
 
-    # Solicita ao usuário que selecione opções e separa em itens de lista
-    usr_input = input("\nEscolha uma ou mais opções acima (somente números separados por espaço): ")
-    usr_input = usr_input.split()
+        input_valid = True
+
+        for item in usr_input:
+            if item.isdigit():
+                item = int(item)
+
+                if item == 0 or item > len(dorks_mapped):
+                    input_valid = False
+                    print("Opção inválida!")
+                else:
+                    pass
+            else:
+                input_valid = False
+                print("Favor digitar somente números!")
+
+        if input_valid:
+            break
 
     # Itera sobre as opções selecionadas pelo usuário e adiciona o dork correspondente à lista de pesquisa
     for item in usr_input:
