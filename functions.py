@@ -6,6 +6,14 @@ import urllib.request
 import sys
 import os
 
+# Paleta de Cores ANSI
+class Color:
+    GREEN = '\033[32m'
+    RED = '\033[31m'
+    BLUE = '\033[34m'
+    YELLOW = '\033[33m'
+    RESET = '\033[0m'
+
 dorks_filename = "dorks.json"
 
 def load_dorks(file_path):
@@ -21,7 +29,7 @@ def load_dorks(file_path):
     
     except FileNotFoundError:
 
-        dorks_newfile = input("Arquivo dorks.json não encontrado! Deseja baixá-lo novamente do repositório remoto? (S/n): ").lower()
+        dorks_newfile = input(f"{Color.YELLOW}Arquivo dorks.json não encontrado! Deseja baixá-lo novamente do repositório remoto? (S/n): {Color.RESET}").lower()
 
         if dorks_newfile == "s" or dorks_newfile == "":
             dorks_url_raw = "https://raw.githubusercontent.com/aureliosccpovoa/dork-web/refs/heads/main/dorks.json"
@@ -29,12 +37,12 @@ def load_dorks(file_path):
 
             return load_dorks(file_path)
         else:
-            print("Execução interrompida (FileNotFoundError).")
+            print(f"{Color.RED}Execução interrompida (FileNotFoundError).{Color.RESET}")
             sys.exit(1)
 
     except json.JSONDecodeError:
 
-        print("Erro ao carregar o arquivo dorks.json. Verificar sintaxe.")
+        print(f"{Color.RED}Erro ao carregar o arquivo dorks.json. Verificar sintaxe.{Color.RESET}")
         sys.exit(1)
 
 
@@ -56,7 +64,7 @@ def select_dorks(dorks):
             # dork_content = dork["dork"]
             # dork_description = dork["descricao"]
 
-            print(f"[{list_number}] {dork_alias}: {dork_name}")
+            print(f"[{Color.BLUE}{list_number}{Color.RESET}] {dork_alias}: {dork_name}")
 
             list_number +=1
 
@@ -64,7 +72,7 @@ def select_dorks(dorks):
     
     while True:
         # Solicita ao usuário que selecione opções e separa em itens de lista
-        usr_input = input("\nEscolha uma ou mais opções acima (somente números separados por espaço): ")
+        usr_input = input(f"\n{Color.BLUE}Escolha uma ou mais opções acima (somente números separados por espaço): {Color.RESET}")
         usr_input = usr_input.split()
 
         input_valid = True
@@ -75,12 +83,12 @@ def select_dorks(dorks):
 
                 if item == 0 or item > len(dorks_mapped):
                     input_valid = False
-                    print("Opção inválida!")
+                    print(f"{Color.RED}Opção inválida!{Color.RESET}")
                 else:
                     pass
             else:
                 input_valid = False
-                print("Favor digitar somente números!")
+                print(f"{Color.RED}Favor digitar somente números!{Color.RESET}")
 
         if input_valid:
             break
@@ -103,7 +111,7 @@ def build_query(dorks_selected):
     full_query  = []
 
     # Solicita a inserção de um domínio a vasculhar
-    target_domain = input("Insira o domínio alvo (ex.: exemplo.com.br): ")
+    target_domain = input(f"{Color.BLUE}Insira o domínio alvo (ex.: exemplo.com.br): {Color.RESET}")
 
     # Se o campo for vazio, passa adiante
     if not target_domain:
@@ -114,7 +122,7 @@ def build_query(dorks_selected):
         full_query.append(target_domain)
 
     # Verifica se o usuário deseja adicionar algo à pesquisa
-    add_keywords = input("Insira palavras-chave adicionais (ex.: senha, config etc): ")
+    add_keywords = input(f"{Color.BLUE}Insira palavras-chave adicionais (ex.: senha, config etc): {Color.RESET}")
 
     if add_keywords == "":
         pass
@@ -122,17 +130,17 @@ def build_query(dorks_selected):
         full_query.append(add_keywords)
 
     # Verifica se o usuário deseja adicionar texto à query
-    modify_query = input("Deseja adicionar ou modificar algo manualmente nesta pesquisa? (S/n): ").lower()
+    modify_query = input(f"{Color.BLUE}Deseja adicionar ou modificar algo manualmente nesta pesquisa? (s/N): {Color.RESET}").lower()
 
-    if modify_query == "s" or modify_query == "":
-        extra_query = input("Insira os parâmetros adicionais que deseja: ")
+    if modify_query == "n" or modify_query == "":
+        pass
+    else:
+        extra_query = input(f"{Color.BLUE}Insira os parâmetros adicionais que deseja: {Color.RESET}")
         if not extra_query:
             pass
         else:
             full_query.append(extra_query)
             query_string = ' '.join(full_query)
-    else:
-        pass
 
     # Concatena a pesquisa até aqui
     full_query.extend(dorks_selected)
@@ -148,7 +156,7 @@ def execute_query(query_string):
     """
     
     # Verifica se o usuário deseja exibir resultados de IA
-    ai_selection = input("Deseja exibir resultados de IA? (s/N): ").lower()
+    ai_selection = input(f"{Color.YELLOW}Deseja exibir resultados de IA? (s/N): {Color.RESET}").lower()
     no_ai_code = "&udm=14"
 
     if ai_selection == "n" or ai_selection == "":
@@ -159,7 +167,7 @@ def execute_query(query_string):
     url_start = "https://www.google.com/search?q="
     final_url = url_start + query_string_parsed
 
-    open_browser = input("Deseja abrir o navegador já com a pesquisa selecionada? (S/n): ").lower()
+    open_browser = input(f"{Color.YELLOW}Deseja abrir o navegador já com a pesquisa selecionada? (S/n): {Color.RESET}").lower()
 
     # Abre o navegador padrão do sistema ou copia a pesquisa para a área de transferência
     if open_browser == "s" or open_browser == "":
@@ -181,10 +189,10 @@ def execute_query(query_string):
                     clipboard_call = ["xclip", "-selection", "clipboard"]
             case _:
                 # Caso o sistema seja desconhecido (ex: FreeBSD)
-                print("Sistema não suportado para área de transferência automática.")
+                print(f"{Color.RED}Sistema não suportado para área de transferência automática.{Color.RESET}")
                 return
 
         subprocess.run(clipboard_call, input=query_string, text=True, check=True)
 
         # Mostra a query gerada
-        print(f"\n[!] PESQUISA COPIADA: {query_string}\n")
+        print(f"\n{Color.GREEN}[!] PESQUISA COPIADA: {query_string}\n{Color.RESET}")
