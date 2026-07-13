@@ -4,6 +4,7 @@ import subprocess
 import urllib.parse
 import urllib.request
 import sys
+import os
 
 dorks_filename = "dorks.json"
 
@@ -164,7 +165,25 @@ def execute_query(query_string):
     if open_browser == "s" or open_browser == "":
         webbrowser.open_new_tab(final_url)
     else:
-        clipboard_call = ["wl-copy"]
+        match sys.platform:
+            case "win32":
+                # Define clipboard_call para Windows
+                clipboard_call = ["clip"]
+            case "darwin":
+                # Define clipboard_call para macOS
+                clipboard_call = ["pbcopy"]
+            case "linux":
+                # Verifica o ambiente Linux
+                os_env = os.environ.get("XDG_SESSION_TYPE")
+                if os_env == "wayland":
+                    clipboard_call = ["wl-copy"]
+                else:
+                    clipboard_call = ["xclip", "-selection", "clipboard"]
+            case _:
+                # Caso o sistema seja desconhecido (ex: FreeBSD)
+                print("Sistema não suportado para área de transferência automática.")
+                return
+
         subprocess.run(clipboard_call, input=query_string, text=True, check=True)
 
         # Mostra a query gerada
